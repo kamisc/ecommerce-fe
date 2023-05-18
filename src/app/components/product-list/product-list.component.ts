@@ -19,7 +19,6 @@ export class ProductListComponent implements OnInit {
   thePageSize: number = 5;
   theTotalElements: number = 0;
   
-
   constructor(
     private productService: ProductService, 
     private route: ActivatedRoute) {}
@@ -74,5 +73,11 @@ export class ProductListComponent implements OnInit {
         this.thePageSize = data.page.size;
         this.theTotalElements = data.page.totalElements;
       });
+  }
+
+  updatePageSize(pageSize: string) {
+    this.thePageSize = +pageSize;
+    this.thePageNumber = 1;
+    this.listProducts();    
   }
 }
