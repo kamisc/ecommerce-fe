@@ -10,19 +10,19 @@ import { ProductCategory } from '../common/product-category';
 export class ProductService {
   private baseUrl = 'http://localhost:8080/api/products'
   private categoryUrl = 'http://localhost:8080/api/product-category';
-  
-  constructor(private httpClient: HttpClient) {}
+
+  constructor(private httpClient: HttpClient) { }
 
   getProduct(theProductId: number): Observable<Product> {
     const productUrl = `${this.baseUrl}/${theProductId}`;
-    
+
     return this.httpClient.get<Product>(productUrl);
   }
 
   getProductListPaginate(
-      thePage: number, 
-      thePageSize:number, 
-      categoryId: number): Observable<GetResponseProducts> {
+    thePage: number,
+    thePageSize: number,
+    categoryId: number): Observable<GetResponseProducts> {
     const searchUrl = `${this.baseUrl}/search/findByCategoryId`;
 
     let params: HttpParams = new HttpParams();
@@ -50,6 +50,21 @@ export class ProductService {
     params = params.append('name', theKeyword);
 
     return this.getProducts(searchUrl, params);
+  }
+
+  searchProductListPaginate(
+    thePage: number,
+    thePageSize: number,
+    theKeyword: string): Observable<GetResponseProducts> {
+    const searchUrl = `${this.baseUrl}/search/findByNameContaining`;
+
+    let params: HttpParams = new HttpParams();
+    params = params
+      .append('name', theKeyword)
+      .append('page', thePage)
+      .append('size', thePageSize);
+
+    return this.httpClient.get<GetResponseProducts>(searchUrl, { params: params });
   }
 
   private getProducts(searchUrl: string, params: HttpParams): Observable<Product[]> {
