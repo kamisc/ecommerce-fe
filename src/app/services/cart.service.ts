@@ -16,7 +16,7 @@ export class CartService {
 
   addToCart(theCartItem: CartItem) {
     let alreadyExistInCart: boolean = false;
-    let existingCartItem: CartItem = undefined;
+    let existingCartItem: CartItem | undefined = undefined;
 
     if (this.cartItems.length > 0) {
       for (let cartItem of this.cartItems) {
@@ -28,7 +28,7 @@ export class CartService {
       alreadyExistInCart = (existingCartItem != undefined);
     }
 
-    if (alreadyExistInCart) {
+    if (alreadyExistInCart && existingCartItem) {
       existingCartItem.quantity++;
     } else {
       this.cartItems.push(theCartItem);
