@@ -14,19 +14,19 @@ export class CartService {
 
   constructor() { }
 
-  addToCart(theCartItem: CartItem) {
+  addToCart(cartItem: CartItem) {
     let alreadyExistInCart: boolean = false;
     let existingCartItem: CartItem | undefined = undefined;
 
     if (this.cartItems.length > 0) {
-      existingCartItem = this.cartItems.find(item  => item.id === theCartItem.id);
+      existingCartItem = this.cartItems.find(item  => item.id === cartItem.id);
       alreadyExistInCart = (existingCartItem != undefined);
     }
 
     if (alreadyExistInCart && existingCartItem) {
       existingCartItem.quantity++;
     } else {
-      this.cartItems.push(theCartItem);
+      this.cartItems.push(cartItem);
     }
 
     this.computeCartTotals();

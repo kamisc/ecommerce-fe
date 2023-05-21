@@ -13,23 +13,23 @@ export class ProductService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getProduct(theProductId: number): Observable<Product> {
-    const productUrl = `${this.baseUrl}/${theProductId}`;
+  getProduct(productId: number): Observable<Product> {
+    const productUrl = `${this.baseUrl}/${productId}`;
 
     return this.httpClient.get<Product>(productUrl);
   }
 
   getProductListPaginate(
-    thePage: number,
-    thePageSize: number,
+    page: number,
+    pageSize: number,
     categoryId: number): Observable<GetResponseProducts> {
     const searchUrl = `${this.baseUrl}/search/findByCategoryId`;
 
     let params: HttpParams = new HttpParams();
     params = params
       .append('id', categoryId)
-      .append('page', thePage)
-      .append('size', thePageSize);
+      .append('page', page)
+      .append('size', pageSize);
 
     return this.httpClient.get<GetResponseProducts>(searchUrl, { params: params });
   }
@@ -43,26 +43,26 @@ export class ProductService {
     return this.getProducts(searchUrl, params);
   }
 
-  searchProducts(theKeyword: string): Observable<Product[]> {
+  searchProducts(keyword: string): Observable<Product[]> {
     const searchUrl = `${this.baseUrl}/search/findByNameContaining`;
 
     let params: HttpParams = new HttpParams();
-    params = params.append('name', theKeyword);
+    params = params.append('name', keyword);
 
     return this.getProducts(searchUrl, params);
   }
 
   searchProductListPaginate(
-    thePage: number,
-    thePageSize: number,
-    theKeyword: string): Observable<GetResponseProducts> {
+    page: number,
+    pageSize: number,
+    keyword: string): Observable<GetResponseProducts> {
     const searchUrl = `${this.baseUrl}/search/findByNameContaining`;
 
     let params: HttpParams = new HttpParams();
     params = params
-      .append('name', theKeyword)
-      .append('page', thePage)
-      .append('size', thePageSize);
+      .append('name', keyword)
+      .append('page', page)
+      .append('size', pageSize);
 
     return this.httpClient.get<GetResponseProducts>(searchUrl, { params: params });
   }
