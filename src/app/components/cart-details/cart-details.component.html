@@ -21,7 +21,7 @@
                                 <label>Quantity:</label>
                                 <div class="row no-gutters">
                                     <div class="col">
-                                        <button class="btn btn-primary btn-sm">
+                                        <button class="btn btn-primary btn-sm" (click)="incrementQuantity(cartItem)">
                                             <i class="fas fa-plus"></i>
                                         </button>
                                     </div>
@@ -29,7 +29,7 @@
                                         {{ cartItem.quantity }}
                                     </div>
                                     <div class="col">
-                                        <button class="btn btn-primary btn-sm">
+                                        <button class="btn btn-primary btn-sm" (click)="decrementQuantity(cartItem)">
                                             <i class="fas fa-minus"></i>
                                         </button>
                                     </div>
