@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { FormServiceService } from './form-service.service';
+import { FormServiceService } from './ecommerce-form.service';
 
 describe('FormServiceService', () => {
   let service: FormServiceService;
