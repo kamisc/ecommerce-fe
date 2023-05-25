@@ -64,7 +64,7 @@ export class CheckoutComponent implements OnInit {
     this.ecommerceFormService.getCreditCardYears().subscribe(data => this.creditCardYears = data);
 
     this.ecommerceFormService.getCountries().subscribe(data => {
-      console.log("Retrieved countries: " + JSON.stringify(data));
+      console.log(`Retrieved countries: ${JSON.stringify(data)}`);
       this.countries = data;
     });
   }
@@ -72,14 +72,19 @@ export class CheckoutComponent implements OnInit {
   onSubmit() {
     console.log("Handling the submit button");
     console.log(this.checkoutFormGroup.get('customer')?.value);
-    console.log("The email address is: " + this.checkoutFormGroup.get('customer')?.value.email);
+    console.log(`The email address is: ${this.checkoutFormGroup.get('customer')?.value.email}`);
+
+    console.log(`The shipping address country is: ${this.checkoutFormGroup.get('shippingAddress')?.value.country.name}`);
+    console.log(`The shipping address state is: ${this.checkoutFormGroup.get('shippingAddress')?.value.state.name}`);
   }
 
   copyShippingAddressToBillingAddress(event: any) {
     if (event.target.checked) {
       this.checkoutFormGroup.controls['billingAddress'].setValue(this.checkoutFormGroup.controls['shippingAddress'].value);
+      this.billingAddressStates = this.shippingAddressStates;
     } else {
       this.checkoutFormGroup.controls['billingAddress'].reset();
+      this.billingAddressStates = [];
     }
   }
 
