@@ -34,11 +34,11 @@ export class CheckoutComponent implements OnInit {
         lastName: ['', [Validators.required, Validators.minLength(2), EcommerceValidators.notOnlyWhitespace]],
         email: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]]}),
       shippingAddress: this.formBuilder.group({
-        street: [''],
-        city: [''],
-        state: [''],
-        country: [''],
-        zipCode: ['']
+        street: ['', [Validators.required, Validators.minLength(2), EcommerceValidators.notOnlyWhitespace]],
+        city: ['', [Validators.required, Validators.minLength(2), EcommerceValidators.notOnlyWhitespace]],
+        state: ['', [Validators.required]],
+        country: ['', [Validators.required]],
+        zipCode: ['', [Validators.required, Validators.minLength(2), EcommerceValidators.notOnlyWhitespace]]
       }),
       billingAddress: this.formBuilder.group({
         street: [''],
@@ -83,17 +83,15 @@ export class CheckoutComponent implements OnInit {
     console.log(`The shipping address state is: ${this.checkoutFormGroup.get('shippingAddress')?.value.state.name}`);
   }
 
-  get firstName() {
-    return this.checkoutFormGroup.get('customer.firstName');
-  }
+  get firstName() { return this.checkoutFormGroup.get('customer.firstName'); }
+  get lastName() { return this.checkoutFormGroup.get('customer.lastName'); }
+  get email() { return this.checkoutFormGroup.get('customer.email'); }
 
-  get lastName() {
-    return this.checkoutFormGroup.get('customer.lastName');
-  }
-
-  get email() {
-    return this.checkoutFormGroup.get('customer.email');
-  }
+  get shippingAddressStreet() { return this.checkoutFormGroup.get('shippingAddress.street'); }
+  get shippingAddressCity() { return this.checkoutFormGroup.get('shippingAddress.city'); }
+  get shippingAddressState() { return this.checkoutFormGroup.get('shippingAddress.state'); }
+  get shippingAddressCountry() { return this.checkoutFormGroup.get('shippingAddress.country'); }
+  get shippingAddressZipCode() { return this.checkoutFormGroup.get('shippingAddress.zipCode'); }
 
   copyShippingAddressToBillingAddress(event: any) {
     if (event.target.checked) {
