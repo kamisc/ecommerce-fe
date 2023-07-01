@@ -5,8 +5,8 @@ import { OrderItem } from "./order-item";
 
 export class Purchase {
     customer: Customer;
-    shippingAddres: Address;
-    billingAddres: Address;
+    shippingAddress: Address;
+    billingAddress: Address;
     order: Order;
     orderItems: OrderItem[];
 }
