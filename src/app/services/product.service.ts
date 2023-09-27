@@ -74,7 +74,8 @@ export class ProductService {
   }
 
   getProductCategories(): Observable<ProductCategory[]> {
-    return this.httpClient.get<GetResponseProductCategories>(this.categoryUrl).pipe(map(resp => resp._embedded.productCategory));
+    return this.httpClient.get<GetResponseProductCategories>(this.categoryUrl).pipe(
+      map(resp => resp._embedded.productCategory));
   }
 }
 
